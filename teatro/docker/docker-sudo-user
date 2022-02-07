@@ -1,0 +1,6 @@
+# Add this in dockerfile to connect docker user to host user
+# Change marko977x username and 1001 id
+RUN adduser --uid=1001 --disabled-password --gecos '' marko977x
+RUN adduser marko977x sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+USER marko977x

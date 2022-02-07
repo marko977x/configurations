@@ -1,0 +1,22 @@
+[/]
+default='6cf689aa-1062-497f-a352-0d5464cfa548'
+list=['6cf689aa-1062-497f-a352-0d5464cfa548']
+
+[:6cf689aa-1062-497f-a352-0d5464cfa548]
+audible-bell=false
+background-color='rgb(0,0,0)'
+background-transparency-percent=17
+bold-is-bright=true
+cursor-shape='ibeam'
+font='Fira Code Medium 11'
+foreground-color='rgb(255,255,255)'
+highlight-colors-set=false
+palette=['rgb(0,0,0)', 'rgb(170,0,0)', 'rgb(0,170,0)', 'rgb(170,85,0)', 'rgb(0,0,170)', 'rgb(170,0,170)', 'rgb(0,170,170)', 'rgb(170,170,170)', 'rgb(85,85,85)', 'rgb(255,0,0)', 'rgb(0,255,0)', 'rgb(255,255,0)', 'rgb(0,0,255)', 'rgb(255,0,255)', 'rgb(0,255,255)', 'rgb(255,255,255)']
+use-system-font=false
+use-theme-colors=false
+use-theme-transparency=false
+use-transparent-background=true
+visible-name='marko977x'
+
+[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+background-color='black'
