@@ -172,4 +172,37 @@ case $build_type in
             exit 0
         fi
     ;;
+
+    v98)
+        if [ "$gerrit_username" != "" ]; then
+            echo "Cloning v98"
+            if [ ! -d "$hbbtv_common_dir" ]; then
+                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_common" "$hbbtv_common_dir"
+            fi
+            cd $hbbtv_common_dir
+            git checkout dev_main
+
+            if [ ! -d "$hbbtv_stack_dir" ]; then
+                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_stack" "$hbbtv_stack_dir"
+            fi
+            cd $hbbtv_stack_dir
+            git checkout dev_main
+
+            if [ ! -d "$teatro_mmlib_iwp_impl_dir" ]; then
+                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_mmlib_iwp_impl" "$teatro_mmlib_iwp_impl_dir"
+            fi
+            cd $teatro_mmlib_iwp_impl_dir
+            git checkout dev_main
+
+            if [ ! -d "$teatro_tv_browser_dir" ]; then
+                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_tv_browser" "$teatro_tv_browser_dir"
+            fi
+            cd $teatro_tv_browser_dir
+            git checkout 98.0.4758.80
+            echo "All repositories cloned"
+        else
+            echo "No gerrit username provided."
+            exit 0
+        fi
+    ;;
 esac

@@ -105,6 +105,7 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///home/marko977x/P
 # # fonts
 sudo apt install -y fonts-firacode
 sudo apt install -y npm
+sudo apt install ninja-build -y
 
 # basic setup
 sudo apt install -y gnome-tweaks
