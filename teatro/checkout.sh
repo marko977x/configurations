@@ -17,28 +17,20 @@ case $build_type in
         if [ "$gerrit_username" != "" ]; then
             echo "Cloning v55"
             if [ ! -d "$hbbtv_common_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_common" "$hbbtv_common_dir"
+                git clone --single-branch -b mediatek "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_common" "$hbbtv_common_dir"
             fi
-            cd $hbbtv_common_dir
-            git checkout mediatek
 
             if [ ! -d "$hbbtv_stack_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_stack" "$hbbtv_stack_dir"
+                git clone --single-branch -b mediatek "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_stack" "$hbbtv_stack_dir"
             fi
-            cd $hbbtv_stack_dir
-            git checkout mediatek
 
             if [ ! -d "$teatro_mmlib_iwp_impl_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_mmlib_iwp_impl" "$teatro_mmlib_iwp_impl_dir"
+                git clone --single-branch -b mediatek "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_mmlib_iwp_impl" "$teatro_mmlib_iwp_impl_dir"
             fi
-            cd $teatro_mmlib_iwp_impl_dir
-            git checkout mediatek
 
             if [ ! -d "$teatro_tv_browser_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_tv_browser" "$teatro_tv_browser_dir"
+                git clone --single-branch -b mediatek "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_tv_browser" "$teatro_tv_browser_dir"
             fi
-            cd $teatro_tv_browser_dir
-            git checkout mediatek
             echo "All repositories cloned"
         else
             echo "No gerrit username provided."
@@ -50,28 +42,20 @@ case $build_type in
         if [ "$gerrit_username" != "" ]; then
             echo "Cloning v73"
             if [ ! -d "$hbbtv_common_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_common" "$hbbtv_common_dir"
+                git clone --single-branch -b dev_main "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_common" "$hbbtv_common_dir"
             fi
-            cd $hbbtv_common_dir
-            git checkout dev_main
 
             if [ ! -d "$hbbtv_stack_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_stack" "$hbbtv_stack_dir"
+                git clone --single-branch -b dev_main "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_stack" "$hbbtv_stack_dir"
             fi
-            cd $hbbtv_stack_dir
-            git checkout dev_main
 
             if [ ! -d "$teatro_mmlib_iwp_impl_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_mmlib_iwp_impl" "$teatro_mmlib_iwp_impl_dir"
+                git clone --single-branch -b mediatek "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_mmlib_iwp_impl" "$teatro_mmlib_iwp_impl_dir"
             fi
-            cd $teatro_mmlib_iwp_impl_dir
-            git checkout mediatek
 
             if [ ! -d "$teatro_tv_browser_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_tv_browser" "$teatro_tv_browser_dir"
+                git clone --single-branch -b dev_main_73.0.3683.75 "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_tv_browser" "$teatro_tv_browser_dir"
             fi
-            cd $teatro_tv_browser_dir
-            git checkout dev_main_73.0.3683.75
             echo "All repositories cloned"
         else
             echo "No gerrit username provided."
@@ -83,35 +67,26 @@ case $build_type in
         if [ "$gerrit_username" != "" ]; then
             echo "Cloning v73"
             if [ ! -d "$hbbtv_common_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_common" "$hbbtv_common_dir"
+                git clone --single-branch -b dev_main "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_common" "$hbbtv_common_dir"
             fi
-            cd $hbbtv_common_dir
-            git checkout dev_main
 
             if [ ! -d "$hbbtv_stack_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_stack" "$hbbtv_stack_dir"
+                git clone --single-branch -b dev_main"ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_stack" "$hbbtv_stack_dir"
             fi
-            cd $hbbtv_stack_dir
-            git checkout dev_main
 
             if [ ! -d "$teatro_mmlib_iwp_impl_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_mmlib_iwp_impl" "$teatro_mmlib_iwp_impl_dir"
+                git clone --single-branch -b dev_main "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_mmlib_iwp_impl" "$teatro_mmlib_iwp_impl_dir"
             fi
-            cd $teatro_mmlib_iwp_impl_dir
-            git checkout dev_main
             git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/libiwp"
             cd libiwp/external
             git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/libdash"
-            git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/libhls"
-            git checkout hls2
+            git clone --single-branch -b hls2 "ssh://$gerrit_username@gerrit.iwedia.com:29418/libhls"
             git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/libiwu"
             git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/open-source"
 
             if [ ! -d "$teatro_tv_browser_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_tv_browser" "$teatro_tv_browser_dir"
+                git clone --single-branch -b dev_main_73.0.3683.75 "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_tv_browser" "$teatro_tv_browser_dir"
             fi
-            cd $teatro_tv_browser_dir
-            git checkout dev_main_73.0.3683.75
             echo "All repositories cloned"
         else
             echo "No gerrit username provided."
@@ -123,49 +98,16 @@ case $build_type in
         if [ "$gerrit_username" != "" ]; then
             echo "Cloning opapps_capy"
             if [ ! -d "$hbbtv_common_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_common" "$hbbtv_common_dir"
+                git clone --single-branch -b opapps_capy "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_common" "$hbbtv_common_dir"
             fi
-            cd $hbbtv_common_dir
-            git checkout opapps_capy
 
             if [ ! -d "$hbbtv_stack_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_stack" "$hbbtv_stack_dir"
+                git clone --single-branch -b opapps_capy "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_stack" "$hbbtv_stack_dir"
             fi
-            cd $hbbtv_stack_dir
-            git checkout opapps_capy
 
             if [ ! -d "$teatro_tv_browser_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_tv_browser" "$teatro_tv_browser_dir"
+                git clone --single-branch -b opapps_capy "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_tv_browser" "$teatro_tv_browser_dir"
             fi
-            cd $teatro_tv_browser_dir
-            git checkout opapps_capy
-            echo "All repositories cloned"
-        else
-            echo "No gerrit username provided."
-            exit 0
-        fi
-    ;;
-
-    gcc1.4.2)
-        if [ "$gerrit_username" != "" ]; then
-            echo "Cloning gcc1.4.2"
-            if [ ! -d "$hbbtv_common_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_common" "$hbbtv_common_dir"
-            fi
-            cd $hbbtv_common_dir
-            git checkout gcc-5.5.0_dfb-1.4.2
-
-            if [ ! -d "$hbbtv_stack_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_stack" "$hbbtv_stack_dir"
-            fi
-            cd $hbbtv_stack_dir
-            git checkout gcc-5.5.0_dfb-1.4.2
-
-            if [ ! -d "$teatro_tv_browser_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_tv_browser" "$teatro_tv_browser_dir"
-            fi
-            cd $teatro_tv_browser_dir
-            git checkout gcc-5.5.0_dfb-1.4.2
             echo "All repositories cloned"
         else
             echo "No gerrit username provided."
@@ -177,28 +119,20 @@ case $build_type in
         if [ "$gerrit_username" != "" ]; then
             echo "Cloning v98"
             if [ ! -d "$hbbtv_common_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_common" "$hbbtv_common_dir"
+                git clone --single-branch -b dev_main "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_common" "$hbbtv_common_dir"
             fi
-            cd $hbbtv_common_dir
-            git checkout dev_main
 
             if [ ! -d "$hbbtv_stack_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_stack" "$hbbtv_stack_dir"
+                git clone --single-branch -b dev_main "ssh://$gerrit_username@gerrit.iwedia.com:29418/hbbtv_stack" "$hbbtv_stack_dir"
             fi
-            cd $hbbtv_stack_dir
-            git checkout dev_main
 
             if [ ! -d "$teatro_mmlib_iwp_impl_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_mmlib_iwp_impl" "$teatro_mmlib_iwp_impl_dir"
+                git clone --single-branch -b dev_main "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_mmlib_iwp_impl" "$teatro_mmlib_iwp_impl_dir"
             fi
-            cd $teatro_mmlib_iwp_impl_dir
-            git checkout dev_main
 
             if [ ! -d "$teatro_tv_browser_dir" ]; then
-                git clone "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_tv_browser" "$teatro_tv_browser_dir"
+                git clone --single-branch -b 98.0.4758.80 "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_tv_browser" "$teatro_tv_browser_dir"
             fi
-            cd $teatro_tv_browser_dir
-            git checkout 98.0.4758.80
             echo "All repositories cloned"
         else
             echo "No gerrit username provided."

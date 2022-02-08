@@ -92,6 +92,13 @@ if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
   sudo apt-get install -y mongodb-org
 fi
 
+# get shotwell
+# read -p "Do you wish to install shotwell? (y/n)" yn
+if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
+  sudo apt-get install shotwell
+  sudo apt purge eog
+fi
+
 # set solid black background
 sudo touch /home/${USER}/Pictures/background.jpg
 sudo curl https://www.solidbackgrounds.com/images/3840x2160/3840x2160-black-solid-color-background.jpg > /home/${USER}/Pictures/background.jpg
@@ -105,7 +112,6 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///home/marko977x/P
 # # fonts
 sudo apt install -y fonts-firacode
 sudo apt install -y npm
-sudo apt install ninja-build -y
 
 # basic setup
 sudo apt install -y gnome-tweaks
