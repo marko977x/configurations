@@ -131,7 +131,7 @@ case $build_type in
             fi
 
             if [ ! -d "$teatro_tv_browser_dir" ]; then
-                git clone --single-branch -b 98.0.4758.80 "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_tv_browser" "$teatro_tv_browser_dir"
+                git clone --single-branch -b dev_main_98.0.4758.80 "ssh://$gerrit_username@gerrit.iwedia.com:29418/teatro_tv_browser" "$teatro_tv_browser_dir"
             fi
             echo "All repositories cloned"
         else
