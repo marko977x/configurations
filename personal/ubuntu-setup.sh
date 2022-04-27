@@ -25,20 +25,20 @@ if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
 	sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
 	sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 	sudo rm -f packages.microsoft.gpg
-	sudo apt install -y apt-transport-https
+	sudo apt install apt-transport-https
 	sudo apt update
-	sudo apt install -y code
+	sudo apt install code
   sudo apt purge gedit
 fi
 
 # get docker
 # read -p "Do you wish to install docker? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo apt install -y ca-certificates curl gnupg lsb-release
+  sudo apt install ca-certificates curl gnupg lsb-release
   sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
   sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
   sudo apt update
-  sudo apt install -y docker-ce docker-ce-cli containerd.io
+  sudo apt install docker-ce docker-ce-cli containerd.io
 fi
 
 # get anydesk
@@ -47,62 +47,38 @@ if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
   sudo wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
   sudo echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list
   sudo apt update
-  sudo apt install -y anydesk
+  sudo apt install anydesk
 fi
 
 # get skype
 # read -p "Do you wish to install skype? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
   sudo wget https://go.skype.com/skypeforlinux-64.deb
-  sudo apt install -y ./skypeforlinux-64.deb
+  sudo apt install ./skypeforlinux-64.deb
   sudo rm -r skypeforlinux-64.deb
 fi
 
 # get thunderbird
 # read -p "Do you wish to install thunderbird? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo apt install -y thunderbird
+  sudo apt install thunderbird
 fi
 
 # get qbittorrent
 # read -p "Do you wish to install qbittorrent? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo apt install -y qbittorrent
+  sudo apt install qbittorrent
 fi
 
 # get vlc
 # read -p "Do you wish to install vlc? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo apt install -y vlc
-fi
-
-# get wps office
-# read -p "Do you wish to install wps office? (y/n)" yn
-if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo snap install wps-office
-fi
-
-# get mongo-db
-# read -p "Do you wish to install mongodb? (y/n)" yn
-if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo apt-get install gnupg
-  wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
-  echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
-  sudo apt-get update
-  sudo apt-get install -y mongodb-org
-fi
-
-# get shotwell
-# read -p "Do you wish to install shotwell? (y/n)" yn
-if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo apt-get install shotwell
-  sudo apt purge eog
+  sudo apt install vlc
 fi
 
 # set solid black background
 sudo touch /home/${USER}/Pictures/background.jpg
 sudo curl https://www.solidbackgrounds.com/images/3840x2160/3840x2160-black-solid-color-background.jpg > /home/${USER}/Pictures/background.jpg
-curl https://calisthenics-parks.com/attachments/y4hF7wsCxVWx3VxmzxgymmF1af4Qy5jQNizDJM8d_100_square.png > /home/${USER}/Pictures/reminder.png
 sudo chmod 777 /home/${USER}/Pictures/background.jpg
 gsettings set org.gnome.desktop.background picture-uri 'file:///home/marko977x/Pictures/background.jpg'
 
@@ -110,12 +86,11 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///home/marko977x/P
 # dconf load /org/gnome/terminal/legacy/profiles:/ < $(pwd)/gnome-terminal-profiles.dconf
 
 # # fonts
-sudo apt install -y fonts-firacode
-sudo apt install -y npm
+sudo apt install fonts-firacode
 
 # basic setup
-sudo apt install -y gnome-tweaks
-sudo apt install -y gnome-shell-extensions
+sudo apt install gnome-tweaks
+sudo apt install gnome-shell-extensions
 gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'google-chrome.desktop', 'code.desktop']"
 gsettings set org.gnome.desktop.background show-desktop-icons false
 gsettings set org.gnome.shell.extensions.desktop-icons show-home false
