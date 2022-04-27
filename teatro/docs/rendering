@@ -1,0 +1,33 @@
+RenderFrame
+* Apparently it has some content because of enum PeripheralContentStatus.
+* You can get a RenderFrame from WebLocalFrame. As well as from routing_id.
+  First question, what exactly is WebLocalFrame? How it relates to RenderFrame?
+* You can get routing_id based on WebFrame(WebLocalFrame or WebRemoteFrame).
+* It is associated with the RenderView, WebView and WebLocalFrame.
+* WebView has some main frame.
+* It can show virtual keyboard.
+* Javascript can be executed within the context of a render frame.
+* MainFrame is marked or can be recognized in some way.
+
+The ways to get RenderFrame object from anywhere:
+1. There is global map <RenderFrame, WebFrame>, So you can get one from another.
+2. Also there is <routing_id, RenderFrame> map.
+3. If you're in a different process you can access specific frame using WebRemoteFrame.
+
+Still don't know how is webview related to render_frame.
+
+WebFrame
+* WebLocalFrame corresponds to RenderFrameHostImpl and
+  WebRemoteFrame corresponds to RenderFrameProxyHost
+
+WebView
+* Every webview has/should have attached MainFrame and this frame can be either
+  local or remote.
+* Zoom, focus, developer tools, context menu, popup menu, visited link state,
+  custom colors, visibility, history, session history,
+* Every webview has it's own storage namespace id. Is it simple storage?
+
+
+
+RenderFrame <--> WebFrame
+WebView --> Page --> MainFrame()
