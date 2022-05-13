@@ -25,8 +25,8 @@ if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
 	sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
 	sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 	sudo rm -f packages.microsoft.gpg
-	sudo apt install apt-transport-https
-	sudo apt update
+	sudo apt install -y apt-transport-https
+	sudo apt update -y
 	sudo apt install code
   sudo apt purge gedit
 fi
@@ -34,11 +34,11 @@ fi
 # get docker
 # read -p "Do you wish to install docker? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo apt install ca-certificates curl gnupg lsb-release
+  sudo apt install -y ca-certificates curl gnupg lsb-release
   sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
   sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  sudo apt update
-  sudo apt install docker-ce docker-ce-cli containerd.io
+  sudo apt update -y
+  sudo apt install -y docker-ce docker-ce-cli containerd.io
 fi
 
 # get anydesk
@@ -46,34 +46,40 @@ fi
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
   sudo wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
   sudo echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list
-  sudo apt update
-  sudo apt install anydesk
+  sudo apt update -y
+  sudo apt install -y anydesk
 fi
 
 # get skype
 # read -p "Do you wish to install skype? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
   sudo wget https://go.skype.com/skypeforlinux-64.deb
-  sudo apt install ./skypeforlinux-64.deb
+  sudo apt install -y ./skypeforlinux-64.deb
   sudo rm -r skypeforlinux-64.deb
 fi
 
 # get thunderbird
 # read -p "Do you wish to install thunderbird? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo apt install thunderbird
+  sudo apt install -y thunderbird
 fi
 
 # get qbittorrent
 # read -p "Do you wish to install qbittorrent? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo apt install qbittorrent
+  sudo apt install -y qbittorrent
 fi
 
 # get vlc
 # read -p "Do you wish to install vlc? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo apt install vlc
+  sudo apt install -y vlc
+fi
+
+# get wps
+# read -p "Do you wish to install wps office? (y/n)" yn
+if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
+  sudo snap install wps-office
 fi
 
 # set solid black background
@@ -89,8 +95,7 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///home/marko977x/P
 sudo apt install fonts-firacode
 
 # basic setup
-sudo apt install gnome-tweaks
-sudo apt install gnome-shell-extensions
+sudo apt install -y gnome-tweaks gnome-shell-extensions
 gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'google-chrome.desktop', 'code.desktop']"
 gsettings set org.gnome.desktop.background show-desktop-icons false
 gsettings set org.gnome.shell.extensions.desktop-icons show-home false
@@ -120,8 +125,9 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot-cli
 sudo systemctl disable bluetooth.service
 
 # setup ssh
-ssh-keygen -t rsa
+ssh-keygen -t ed25519
 eval "$(ssh-agent -s)"
+ssh-add
 
 # update and upgrade
 sudo apt update
