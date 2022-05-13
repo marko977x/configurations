@@ -76,6 +76,15 @@ if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
   sudo apt install vlc
 fi
 
+mkdir libs && cd libs
+# solves problem with anydesk on ubuntu 22
+http://ftp.de.debian.org/debian/pool/main/p/pangox-compat/libpangox-1.0-0_0.0.2-5.1_amd64.deb
+sudo dpkg -i libpangox-1.0-0_0.0.2-5.1_amd64.deb
+# solves problem with wps on ubuntu 22
+wget http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1l-1ubuntu1.3_amd64.deb
+sudo dpkg -i libssl1.1_1.1.1l-1ubuntu1.3_amd64.deb
+cd ../ && rm -rf libs
+
 # set solid black background
 sudo touch /home/${USER}/Pictures/background.jpg
 sudo curl https://www.solidbackgrounds.com/images/3840x2160/3840x2160-black-solid-color-background.jpg > /home/${USER}/Pictures/background.jpg
