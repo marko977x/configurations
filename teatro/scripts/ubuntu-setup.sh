@@ -79,14 +79,22 @@ fi
 # get wps
 # read -p "Do you wish to install wps office? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo snap install wps-office
+  mkdir wps && cd wps
+  wget https://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/10702/wps-office_11.1.0.10702.XA_amd64.deb
+  sudo dpkg -i wps-office_11.1.0.10702.XA_amd64.deb
+  sudo apt install ./wps-office_11.1.0.10702.XA_amd64.deb -y
+  cd ../ && rm -rf wps
 fi
 
+touch ~/Templates/Word.doc
+touch ~/Templates/Excel.
+touch ~/Templates/Word.doc
+
 # set solid black background
-sudo touch /home/${USER}/Pictures/background.jpg
-sudo curl https://www.solidbackgrounds.com/images/3840x2160/3840x2160-black-solid-color-background.jpg > /home/${USER}/Pictures/background.jpg
-sudo chmod 777 /home/${USER}/Pictures/background.jpg
-gsettings set org.gnome.desktop.background picture-uri 'file:///home/marko977x/Pictures/background.jpg'
+gsettings set org.gnome.desktop.background primary-color '#000000'
+gsettings reset org.gnome.desktop.background color-shading-type
+gsettings set org.gnome.desktop.background picture-uri ''
+gsettings set org.gnome.desktop.background picture-uri-dark ''
 
 # # setup terminal
 # dconf load /org/gnome/terminal/legacy/profiles:/ < $(pwd)/gnome-terminal-profiles.dconf
@@ -98,7 +106,10 @@ sudo apt install fonts-firacode
 sudo apt install -y gnome-tweaks gnome-shell-extensions
 gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'google-chrome.desktop', 'code.desktop']"
 gsettings set org.gnome.desktop.background show-desktop-icons false
+# this one is for ubuntu 20
 gsettings set org.gnome.shell.extensions.desktop-icons show-home false
+# this one is for ubuntu 22
+gsettings set org.gnome.shell.extensions.ding show-home false
 gsettings set org.gnome.shell.extensions.desktop-icons show-trash false
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
