@@ -22,22 +22,22 @@ fi
 # read -p "Do you wish to install vscode? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
 	sudo wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-	sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+	sudo install -y -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
 	sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 	sudo rm -f packages.microsoft.gpg
-	sudo apt install apt-transport-https
+	sudo apt install -y apt-transport-https
 	sudo apt update
-	sudo apt install code
+	sudo apt install -y code
   sudo apt purge gedit
 fi
 
 # get docker
 # read -p "Do you wish to install docker? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo apt install ca-certificates curl gnupg lsb-release
+  sudo apt install -y ca-certificates curl gnupg lsb-release
   sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
   sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  sudo apt update
+  sudo apt update -y
   sudo apt install docker-ce docker-ce-cli containerd.io
 fi
 
@@ -46,34 +46,34 @@ fi
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
   sudo wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
   sudo echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list
-  sudo apt update
-  sudo apt install anydesk
+  sudo apt update -y
+  sudo apt install -y anydesk
 fi
 
 # get skype
 # read -p "Do you wish to install skype? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
   sudo wget https://go.skype.com/skypeforlinux-64.deb
-  sudo apt install ./skypeforlinux-64.deb
+  sudo apt install -y ./skypeforlinux-64.deb
   sudo rm -r skypeforlinux-64.deb
 fi
 
 # get thunderbird
 # read -p "Do you wish to install thunderbird? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo apt install thunderbird
+  sudo apt install -y thunderbird
 fi
 
 # get qbittorrent
 # read -p "Do you wish to install qbittorrent? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo apt install qbittorrent
+  sudo apt install -y qbittorrent
 fi
 
 # get vlc
 # read -p "Do you wish to install vlc? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
-  sudo apt install vlc
+  sudo apt install -y vlc
 fi
 
 # get wps
@@ -82,7 +82,7 @@ if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
   mkdir wps && cd wps
   wget https://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/10702/wps-office_11.1.0.10702.XA_amd64.deb
   sudo dpkg -i wps-office_11.1.0.10702.XA_amd64.deb
-  sudo apt install ./wps-office_11.1.0.10702.XA_amd64.deb -y
+  sudo apt install -y ./wps-office_11.1.0.10702.XA_amd64.deb -y
   cd ../ && rm -rf wps
 fi
 
@@ -111,7 +111,7 @@ gsettings set org.gnome.desktop.background picture-uri-dark ''
 # dconf load /org/gnome/terminal/legacy/profiles:/ < $(pwd)/gnome-terminal-profiles.dconf
 
 # # fonts
-sudo apt install fonts-firacode
+sudo apt install -y fonts-firacode
 
 # basic setup
 sudo apt install gnome-tweaks
@@ -153,6 +153,6 @@ eval "$(ssh-agent -s)"
 ssh-add
 
 # update and upgrade
-sudo apt update
-sudo apt upgrade
-sudo apt autoremove
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt autoremove -y
