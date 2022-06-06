@@ -1,5 +1,5 @@
 sudo apt update
-yn="n"
+yn="y"
 # get google chrome
 # read -p "Do you wish to install chrome? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
@@ -21,12 +21,13 @@ fi
 # get vscode
 # read -p "Do you wish to install vscode? (y/n)" yn
 if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
+  sudo apt-get install wget gpg
 	sudo wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-	sudo install -y -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+	sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
 	sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 	sudo rm -f packages.microsoft.gpg
 	sudo apt install -y apt-transport-https
-	sudo apt update
+	sudo apt update -y
 	sudo apt install -y code
   sudo apt purge gedit
 fi
@@ -38,7 +39,7 @@ if [[ $yn == "y" ]] || [[ $yn == "" ]]; then
   sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
   sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
   sudo apt update -y
-  sudo apt install docker-ce docker-ce-cli containerd.io
+  sudo apt install -y docker-ce docker-ce-cli containerd.io
 fi
 
 # get anydesk
@@ -94,7 +95,7 @@ fi
 
 mkdir libs && cd libs
 # solves problem with anydesk on ubuntu 22
-http://ftp.de.debian.org/debian/pool/main/p/pangox-compat/libpangox-1.0-0_0.0.2-5.1_amd64.deb
+wget http://ftp.de.debian.org/debian/pool/main/p/pangox-compat/libpangox-1.0-0_0.0.2-5.1_amd64.deb
 sudo dpkg -i libpangox-1.0-0_0.0.2-5.1_amd64.deb
 # solves problem with wps on ubuntu 22
 wget http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1l-1ubuntu1.3_amd64.deb
@@ -108,18 +109,30 @@ gsettings set org.gnome.desktop.background picture-uri ''
 gsettings set org.gnome.desktop.background picture-uri-dark ''
 
 # # setup terminal
-# dconf load /org/gnome/terminal/legacy/profiles:/ < $(pwd)/gnome-terminal-profiles.dconf
+dconf load /org/gnome/terminal/legacy/profiles:/ < $(pwd)/gnome-terminal-profiles.dconf
 
-# # fonts
-sudo apt install -y fonts-firacode
+# # libs
+sudo apt install -y fonts-firacode repo build-essential libssl-dev
+
+# # install cmake
+mkdir cmake_build \
+    && cd cmake_build \
+    && wget https://github.com/Kitware/CMake/releases/download/v3.20.0/cmake-3.20.0.tar.gz \
+    && tar -xf cmake-3.20.0.tar.gz \
+    && cd cmake-3.20.0 \
+    && ./configure \
+    && make -j16 \
+    && make install \
+    && cd ../ \
+    && rm -rf cmake_build
 
 # basic setup
-sudo apt install gnome-tweaks
-sudo apt install gnome-shell-extensions
+sudo apt install -y gnome-tweaks
+sudo apt install -y gnome-shell-extensions
 gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'google-chrome.desktop', 'code.desktop']"
 gsettings set org.gnome.desktop.background show-desktop-icons false
 # this one is for ubuntu 20
-gsettings set org.gnome.shell.extensions.desktop-icons show-home false
+# gsettings set org.gnome.shell.extensions.desktop-icons show-home false
 # this one is for ubuntu 22
 gsettings set org.gnome.shell.extensions.ding show-home false
 gsettings set org.gnome.shell.extensions.desktop-icons show-trash false
@@ -153,6 +166,7 @@ eval "$(ssh-agent -s)"
 ssh-add
 
 # update and upgrade
+sudo apt install -y ubuntu-drivers
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt autoremove -y
